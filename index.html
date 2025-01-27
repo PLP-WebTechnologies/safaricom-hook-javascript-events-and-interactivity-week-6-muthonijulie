@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <!-- toggle button that changes backgroundcolors -->
+    <button id="toggle">Change background color</button>
+
+    <form id="form1" action="">
+
+        <h1>REGISTER</h1>
+        <!-- slider -->
+        <input type="range" id="fontSlider" min="10" max="50" value="20">
+    <p id="sliderText" style="font-size: 20px;">Ensure that you fill in all your details</p>
+
+    <label for="name">Username</label><br>
+    <input type="text" name="Username" id="username" required><br>
+  
+    <label for="email">Email</label><br>
+    <input type="email" name="email" id="email" ><br>
+    <label for="passwd">Password</label><br>
+<input type="password" name="passwd" id="passwd"><br>
+     <ul id="errormessage" class="errormessage"></ul>
+   <button type="submit">Submit</button><br> 
+</form>
+
+<div class="content">
+    <select id="dropdown">
+        <option value="" disabled selected>Select an option</option>
+        <option value="message1">Create more accounts</option>
+        <option value="message2">Sign in if you have an account</option>
+        <option value="message3">Wait for account approval</option>
+    </select>
+    <p id="message"></p>
+    <!-- modal -->
+<button id="openModal">Open</button>
+<div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:white; box-shadow:0 0 10px rgba(0,0,0,0.5);">
+  <p>Welcome to our platform!</p>
+  <button id="closeModal">Close</button>
+</div>
+</div>
+
+
+<script>
+ 
+    const toggleButton = document.getElementById("toggle");
+        let isDefaultColor = true;
+        toggleButton.onclick = function () {
+            document.body.style.backgroundColor = isDefaultColor ? "lightblue" : "red";
+            isDefaultColor = !isDefaultColor;
+        };
+        
+    document.getElementById('form1').addEventListener('submit', function (event) {
+    // Prevent form submission
+    event.preventDefault();
+
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("passwd");
+    const errormessage = document.getElementById("errormessage");
+
+    // Clear previous error messages
+    errormessage.innerHTML = '';
+    let isValid = true;
+
+    // Validate username
+    if (!usernameInput.value.trim()) {
+        displayError("Username is required");
+        isValid = false;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailInput.value.trim()) {
+        displayError("Email is required");
+        isValid = false;
+    } else if
+        // Validate email format
+        (!emailRegex.test(emailInput.value.trim())) {
+            displayError("Please enter a valid email address.");
+            isValid = false;
+        
+    }
+
+    // Validate password
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordInput.value.trim()) {
+        displayError("Password is required");
+        isValid = false;
+    } else if
+        // Validate password strength
+        (!passwordRegex.test(passwordInput.value.trim())) {
+            displayError("Password must be at least 8 characters long, include at least one uppercase letter, one number, and one special character.");
+            isValid = false;
+        
+    }
+    
+    // If the form is valid, submit it
+    if (isValid) {
+        alert("Form submitted successfully!");
+        submit();this
+    }
+
+});
+
+// Function to display error messages
+    function displayError(message) {
+        const errormessage = document.getElementById('errormessage');
+        const errorItem = document.createElement('li');
+        errorItem.textContent = message;
+        errormessage.appendChild(errorItem);
+    }
+    //slider with real time feedback
+        const slider = document.getElementById("fontSlider");
+        const text1 = document.getElementById("sliderText");
+
+        slider.oninput = function () {
+        text1.style.fontSize = `${slider.value}px`;
+  };
+  //modal with event listeners
+        const modal = document.getElementById("modal");
+        const openModal = document.getElementById("openModal");
+        const closeModal = document.getElementById("closeModal");
+
+        openModal.onclick = function () {
+        modal.style.display = "block";
+  };
+  closeModal.onclick = function () {
+    modal.style.display = "none";
+  };
+//dropdown menu displaying custom message once a message is selected
+      const dropdown = document.getElementById("dropdown");
+        const message = document.getElementById("message");
+
+        dropdown.onchange = function () {
+            const selectedValue = dropdown.value;
+
+            // Display a custom message based on the selected option
+            switch (selectedValue) {
+                case "message1":
+                    message.textContent = "You can create an account!";
+                    break;
+                case "message2":
+                    message.textContent = "You can sign in to your account!";
+                    break;
+                case "message3":
+                    message.textContent = "Wait for approval!";
+                    break;
+                default:
+                    message.textContent = ""; // Clear the message if no option is selected
+            }
+        };
+</script>
+</body>
+</html>

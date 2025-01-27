@@ -1,0 +1,56 @@
+        form{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: grey;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px;
+            width: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            
+        }
+      form label {
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+          
+}
+
+        form input {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            }
+        form button {
+            width: 40%;
+            padding: 10px;
+            background-color: lightpink;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition:background-color 0.5s ease-in-out,transform 0.3s;
+}
+
+    form button:hover {
+           background-color: #45a049;
+           transform:scale(1,1);
+}
+    .errormessage {
+            color: red;
+            list-style-type: none;
+            padding: 0;
+        }
+    .content{
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align:left;
+            width: 100%;
+    
+        }
